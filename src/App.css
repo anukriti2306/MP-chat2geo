@@ -1,3 +1,33 @@
+/* 🌌 Dark mode with neon undertones */
+body {
+  background: radial-gradient(circle at top left, #0a0a0f, #000000 80%);
+  color: #f5f5f5;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* 🌸 Neon pink borders */
+.neon-border {
+  border: 2px solid #ff007f;
+  box-shadow: 
+    0 0 8px #ff007f,
+    0 0 16px #ff007f,
+    0 0 24px rgba(255, 0, 127, 0.6);
+  border-radius: 0.75rem;
+}
+
+/* ✨ Neon text glow */
+.neon-glow {
+  color: #ff80bf;
+  text-shadow: 
+    0 0 5px #ff007f,
+    0 0 15px #ff007f,
+    0 0 25px #ff1ac1;
+}
+
+/* 🔲 App container */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,19 +35,23 @@
   text-align: center;
 }
 
+/* ⚡ Neon glowing logos */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #0ff); /* neon cyan glow */
 }
 
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #0f0); /* neon green glow */
+}
+
+/* 🔄 Logo animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -33,10 +67,18 @@
   }
 }
 
+/* 💎 Neon card effect */
 .card {
   padding: 2em;
+  background: #111;
+  border-radius: 1rem;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 127, 0.6), 
+    0 0 40px rgba(0, 255, 255, 0.4);
+  border: 1px solid rgba(255, 0, 127, 0.8);
 }
 
+/* 📘 Muted docs link */
 .read-the-docs {
   color: #888;
 }

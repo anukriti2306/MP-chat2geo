@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* --- Design tokens (HSL) --- */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -17,6 +14,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
+    /* keep light-mode primary neutral */
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
 
@@ -26,43 +24,36 @@ All colors MUST be HSL.
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 330 100% 60%;           /* neon pink undertone */
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 330 100% 60%;              /* neon pink focus ring */
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 330 100% 60%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 222.2 84% 6%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 222.2 84% 6%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
@@ -74,7 +65,8 @@ All colors MUST be HSL.
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    /* 🔥 neon pink undertone everywhere we can */
+    --accent: 330 100% 60%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -82,24 +74,63 @@ All colors MUST be HSL.
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 330 100% 60%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 330 100% 60%;     /* sidebar highlights = neon pink */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 330 100% 60%;
   }
 }
 
+/* --- Global base so it shows even if components don’t use our classes --- */
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
   body {
     @apply bg-background text-foreground;
+    /* subtle neon undertone to the whole page */
+    background-image:
+      radial-gradient(60rem 30rem at -10% -10%, hsl(330 100% 20% / 0.25), transparent 60%),
+      radial-gradient(50rem 25rem at 110% 0%, hsl(195 100% 40% / 0.15), transparent 60%),
+      radial-gradient(40rem 20rem at 50% 120%, hsl(330 100% 20% / 0.2), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  /* make focus/active elements glow pink */
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px hsl(var(--ring) / 0.6),
+      0 0 10px hsl(var(--ring) / 0.5),
+      0 0 20px hsl(var(--ring) / 0.3);
+  }
+}
+
+/* --- Reusable utilities you can sprinkle on components --- */
+@layer utilities {
+  .neon-text { 
+    color: hsl(var(--accent));
+    text-shadow:
+      0 0 6px hsl(var(--accent) / 0.9),
+      0 0 14px hsl(var(--accent) / 0.6);
+  }
+  .neon-border {
+    border-color: hsl(var(--accent));
+    box-shadow:
+      0 0 8px hsl(var(--accent) / 0.8),
+      0 0 18px hsl(var(--accent) / 0.5);
+  }
+  .neon-card {
+    border: 1px solid hsl(var(--accent) / 0.7);
+    background-color: hsl(var(--card) / 0.6);
+    box-shadow:
+      0 0 10px hsl(var(--accent) / 0.55),
+      0 0 26px hsl(195 100% 50% / 0.25);
+    backdrop-filter: blur(6px);
   }
 }
